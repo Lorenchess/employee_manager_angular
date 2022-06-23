@@ -3,6 +3,7 @@ import { Employee } from './employee/employee';
 import {EmployeeService} from './employee-service/employee.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -22,15 +23,22 @@ export class AppComponent implements OnInit {
   }
 
   public getEmployees():void {
-   this.employeeService.getEmployees().subscribe(
-     (response: Employee[])=> {
-        this.employees = response;
-     },
-     (error: HttpErrorResponse) => {
-       console.log(error.message)
-     }
-   );
+   this.employeeService.getEmployees().subscribe(()=> {
+      (response: Employee[])=> this.employees = response;
+      (error: HttpErrorResponse)=> console.log(error.message);
+   })
   }
+
+  // public getEmployees():void {
+  //   this.employeeService.getEmployees().subscribe(
+  //     (response: Employee[])=> {
+  //        this.employees = response;
+  //     },
+  //     (error: HttpErrorResponse) => {
+  //       console.log(error.message)
+  //     }
+  //   );
+  //  }
 
   public onOpenModal(employee: any, mode: string):void {
     const container = document.getElementById('main-container');
@@ -65,13 +73,13 @@ export class AppComponent implements OnInit {
     closeModalBtn.click();
   }
      this.employeeService.addEmployee(addForm.value).subscribe(
-      (response:Employee)=> {
+       (response:Employee)=> {
        console.log(response);
        this.getEmployees();
       },
       (error:HttpErrorResponse)=> {
         console.log(error.message);
-      },
+      }
      )
   }
 
@@ -89,3 +97,7 @@ export class AppComponent implements OnInit {
   }
 
 }
+function next(next: any, arg1: (response: Employee) => void, arg2: (error: HttpErrorResponse) => void, arg3: () => void) {
+  throw new Error('Function not implemented.');
+}
+
