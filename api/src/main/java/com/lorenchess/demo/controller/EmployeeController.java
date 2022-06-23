@@ -2,7 +2,6 @@ package com.lorenchess.demo.controller;
 
 import com.lorenchess.demo.payloadDTO.EmployeeDTO;
 import com.lorenchess.demo.service.EmployeeService;
-import com.lorenchess.demo.service.EmployeeServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
